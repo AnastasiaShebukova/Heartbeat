@@ -13,24 +13,8 @@ public class HeartBeatRest {
 	
 	@POST
 	@Path("/HeartBeat")
-	public int getHeartBeat(@PathParam("HeartBeat") int heartbeat) throws RemoteException {
-		return new GetHeartBeat().setHeartBeatState(heartbeat);
+	public void getHeartBeat(@PathParam("HeartBeat") int heartbeat) throws RemoteException {
+		new HeartBeatImpl().update(heartbeat);
 	}
-	
-	/*@GET
-	public String hello() {
-		return "world!";
-	}
-	*/
-	
-	/*@GET
-	@Produces({MediaType.TEXT_HTML})
-	public InputStream viewHeartBeat() {
-	File f = getFileFromSomewhere();
-	return new FileInputStream(f);
-	}
-	*/
-
-	
 
 }

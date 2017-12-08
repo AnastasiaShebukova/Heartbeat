@@ -2,19 +2,21 @@ package org.htw.fiw.vs;
 
 import java.rmi.RemoteException;
 
-public class GetHeartBeat extends java.rmi.server.UnicastRemoteObject implements HeartBeatRMIInterface, HeartBeatObserverInterface, HeartBeatSubjectInterface  {
+public class HeartBeatImpl extends java.rmi.server.UnicastRemoteObject implements HeartBeat, HeartBeatObserverInterface, HeartBeatSubjectInterface  {
 
-	protected GetHeartBeat() throws RemoteException {
+	int heartbeat;
+	
+	protected HeartBeatImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	@Override
-	public int setHeartBeatState(int heartBeat) throws RemoteException {
-		return heartBeat;
+	public int getHeartBeat() throws RemoteException {
+		return this.heartbeat;
 	}
 	@Override
 	public void update(int heartBeat) throws RemoteException {
-		// TODO Auto-generated method stub
+		this.heartbeat = heartBeat;
 		
 	}
 	@Override

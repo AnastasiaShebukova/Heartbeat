@@ -4,13 +4,13 @@ import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class HeartBeatServer implements Remote {
+public class HeartBeatClient implements Remote {
 
 	//hier Singleton mit GetHeartBeat!
 	
-		public HeartBeatServer() {
+		public HeartBeatClient() {
 			try {
-				GetHeartBeat heartBeat = new GetHeartBeat();
+				HeartBeatImpl heartBeat = new HeartBeatImpl();
 				Registry registry = LocateRegistry.createRegistry(8080);
 				registry.bind("HeartBeat", heartBeat);
 			} 
@@ -18,7 +18,7 @@ public class HeartBeatServer implements Remote {
 		}
 
 		public static void main(String[] args) {
-			new HeartBeatServer();
+			new HeartBeatClient();
 
 		}
 
