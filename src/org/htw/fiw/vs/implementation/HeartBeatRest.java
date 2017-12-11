@@ -14,7 +14,8 @@ public class HeartBeatRest {
 	@POST
 	@Path("/HeartBeat")
 	public void getHeartBeat(@PathParam("HeartBeat") int heartbeat) throws RemoteException {
-		new HeartBeatImpl().update(heartbeat);
+		System.out.println("Heartbeat set to: "+heartbeat);
+		new HeartBeatImpl().setHeartBeat(heartbeat);
 	}
 
 }
