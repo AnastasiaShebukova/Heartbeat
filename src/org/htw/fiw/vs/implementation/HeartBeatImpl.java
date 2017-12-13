@@ -1,11 +1,18 @@
-package org.htw.fiw.vs;
+package org.htw.fiw.vs.implementation;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.htw.fiw.vs.interfaces.HeartBeat;
+import org.htw.fiw.vs.interfaces.HeartBeatObserverInterface;
+import org.htw.fiw.vs.interfaces.HeartBeatSubjectInterface;
 
 public class HeartBeatImpl extends java.rmi.server.UnicastRemoteObject implements HeartBeat, HeartBeatObserverInterface, HeartBeatSubjectInterface  {
 
 	int heartbeat;
-	List<HeartBeatObserver> observerList = new ArrayList<HeartBeatObserver>();
+	
+	List<Object> observerList = new ArrayList<Object>();
 	
 	protected HeartBeatImpl() throws RemoteException {
 		super();
@@ -17,54 +24,31 @@ public class HeartBeatImpl extends java.rmi.server.UnicastRemoteObject implement
 		return this.heartbeat;
 	}
 	
-	//die funktion könnte von dem REST call aufgerufen werden? Und würde dann den state setzen und die beaobachter benachrichtigen?
-	public void setHeartBeat(int heartbeat) {
+	//die funktion kï¿½nnte von dem REST call aufgerufen werden? Und wï¿½rde dann den state setzen und die beaobachter benachrichtigen?
+	public void setHeartBeat(int heartbeat) throws RemoteException {
 		this.heartbeat = heartbeat;
-		this.notifyObservers;
+		notifyObservers();
 	}
 	
-	//das ist unklar. Die update Methode müsste doch eigentlich auf der anderen Seite implementiert werden, und nicht beide Interfaces in einer Klasse.
+	//das ist unklar. Die update Methode mï¿½sste doch eigentlich auf der anderen Seite implementiert werden, und nicht beide Interfaces in einer Klasse.
 	@Override
-	public void update() throws RemoteException {
-		
-		
+	public void update(Object observer) throws RemoteException {
 	}
 	
 	@Override
-	public void subscribeObject(HeartBeatObserver observer) throws RemoteException {
+	public void subscribeObject(Object observer) throws RemoteException {
 		this.observerList.add(observer);		
 	}
 	
 	@Override
-	public void removeObject(HeartBeatObserver observer) throws RemoteException {
+	public void removeObject(Object observer) throws RemoteException {
 		this.observerList.remove(observer);
 		
 	}
 	@Override
 	public void notifyObservers() throws RemoteException {
-		for (HeartBeatObserver observer : observerList) {
-			observer.update();
+		for (Object observer : this.observerList) {
+			update(observer);
 		}
 	}
-
-	@Override
-	public void subscribeObject(Object object) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeObject(Object object) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Object observable, int heartbeat) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-
 }

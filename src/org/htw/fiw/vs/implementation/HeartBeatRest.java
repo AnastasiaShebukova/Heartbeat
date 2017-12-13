@@ -1,4 +1,4 @@
-package org.htw.fiw.vs;
+package org.htw.fiw.vs.implementation;
 
 import java.rmi.RemoteException;
 

@@ -1,4 +1,4 @@
-package org.htw.fiw.vs;
+package org.htw.fiw.vs.interfaces;
 
 public interface HeartBeat extends java.rmi.Remote {
 	
