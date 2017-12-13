@@ -5,25 +5,28 @@ import java.rmi.RemoteException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 @Path("/HeartBeat")
 public class HeartBeatRest {
-	
-	//no GET request - only POST request: Gets heartbeat number from frontend
-	
+
 	@POST
-	@Consumes({MediaType.APPLICATION_JSON})
-	@Produces({MediaType.TEXT_PLAIN})
-	public String getHeartBeat(String msg) throws RemoteException {
-		System.out.println("Heartbeat set to: "+ msg);
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public void getHeartBeat(String msg) throws RemoteException, ParseException {
+
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(msg);
+		String rateString = (String) json.get("rate");
 		
-		
-		//new HeartBeatImpl().setHeartBeat(heartbeat);
-		
-		return "ok";
+		int heartrate = Integer.parseInt(rateString);
+		HeartBeatImpl heartBeat = HeartBeatImpl.getInstance();
+
+		heartBeat.setHeartBeat(heartrate);
 	}
 
 }
