@@ -15,7 +15,7 @@ html, body {
 #box1 {
     width:100%;
     display: flex;
-    background:yellow;
+    background:red;
     flex: 1;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@ html, body {
 #box2 {
     width:100%;
     display: flex;
-    background:green;
+    background:white;
     flex: 1;
     justify-content: center;
     align-items: center;
