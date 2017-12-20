@@ -34,7 +34,11 @@ function heartbeatChange() {
         $.ajax({
             type: "POST",
             url: "http://localhost:9080/HeartBeat",
-            data: JSON.stringify({ 'rate': heartbeatValue }),
+            data: JSON.stringify(
+	    		{ 
+	    			'rate': heartbeatValue 
+	    		}
+            ),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(data){
